@@ -1,23 +1,27 @@
 public class PlayerNode {
 
-    private PlayerInTournament player;
-    private int key;
-    private PlayerNode player_left_son;
-    private PlayerNode player_middle_son;
-    private PlayerNode player_right_son;
-    private PlayerNode player_parent;
+    private Player player;
+    private int faculty_id;
+    private int goals;
+    private PlayerNode left;
+    private PlayerNode middle;
+    private PlayerNode right;
+    private PlayerNode parent;
+    private PlayerNode predecessor;
+    private PlayerNode successor;
 
-    public PlayerNode(PlayerInTournament player) {
+
+    public PlayerNode(Player player) {
         this.player = player;
     }
 
-    public PlayerNode(PlayerInTournament player, int key, PlayerNode player_left_son, PlayerNode player_middle_son,
-                      PlayerNode player_right_son, PlayerNode player_parent) {
+    public PlayerNode(Player player, int goals, int faculty_id, PlayerNode player_parent) {
         this.player = player;
-        this.key = key;
-        this.player_left_son = player_left_son;
-        this.player_middle_son = player_middle_son;
-        this.player_right_son = player_right_son;
-        this.player_parent = player_parent;
+        this.goals = goals;
+        this.faculty_id = faculty_id;
+        this.left = null;
+        this.middle = null;
+        this.right = null;
+        this.parent = player_parent;
     }
 }
