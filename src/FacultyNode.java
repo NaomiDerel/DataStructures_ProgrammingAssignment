@@ -1,23 +1,53 @@
 public class FacultyNode {
 
-    private FacultyInTournament faculty;
-    private FacultyNode faculty_left_son;
-    private FacultyNode faculty_middle_son;
-    private FacultyNode faculty_right_son;
-    private FacultyNode faculty_parent;
+    protected Faculty faculty;
+    protected int score;
+    protected Player[] players;
+
+    protected FacultyNode left;
+    protected FacultyNode middle;
+    protected FacultyNode right;
+    protected FacultyNode parent;
+    protected FacultyNode predecessor;
+    protected FacultyNode successor;
 
 
-    public FacultyNode(FacultyInTournament faculty) {
-        this.faculty = faculty;
+    public FacultyNode() {
     }
 
-    public FacultyNode(FacultyInTournament faculty, FacultyNode faculty_parent){
+    public FacultyNode(Faculty faculty) {
+        this.faculty = faculty;
+        this.score = 0;
+        this.players = new Player[11];
+
+        this.parent = null;
+        this.left = null;
+        this.middle = null;
+        this.right = null;
+    }
+
+    public FacultyNode(Faculty faculty, int score , Player[] players){
 
         this.faculty = faculty;
-        this.faculty_parent = faculty_parent;
-        this.faculty_left_son = null;
-        this.faculty_middle_son = null;
-        this.faculty_right_son = null;
+        this.score = score;
+        this.players = players;
+
+        this.parent = null;
+        this.left = null;
+        this.middle = null;
+        this.right = null;
+    }
+
+    public FacultyNode(Faculty faculty, FacultyNode faculty_parent , int score , Player[] players){
+
+        this.faculty = faculty;
+        this.score = score;
+        this.players = players;
+
+        this.parent = faculty_parent;
+        this.left = null;
+        this.middle = null;
+        this.right = null;
     }
 
 
