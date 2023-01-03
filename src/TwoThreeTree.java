@@ -1,5 +1,5 @@
 public interface TwoThreeTree {
-    public Boolean compare(Node x, Node y);
+    public int compare(Node x, Node y);
     public Node Successor(Node x);
     public Node Predecessor(Node x);
     public void Update_Key(Node x);
@@ -7,5 +7,5 @@ public interface TwoThreeTree {
     public Node Insert_And_Split(Node x,Node z);
     public void Insert (Node z);
     public Node borrowOrMerge(Node y);
-    public void Delete(Node x);
+    public void DeleteWithNode(Node x);
 }

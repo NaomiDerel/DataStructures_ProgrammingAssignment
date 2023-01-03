@@ -71,11 +71,14 @@ public abstract class TwoThreeTreePlayer implements TwoThreeTree {
     public void Update_Key(Node x){
         Node<PlayerInTournament> y = x;
         y.node_content.player.setId(y.left.node_content.player.getId());
+        y.node_content.goals = y.left.node_content.goals;
         if (y.middle != null) {
             y.node_content.player.setId(y.middle.node_content.player.getId());
+            y.node_content.goals = y.middle.node_content.goals;
         }
         if (x.right != null) {
             y.node_content.player.setId(y.right.node_content.player.getId());
+            y.node_content.goals = y.right.node_content.goals;
         }
     }
 
@@ -141,7 +144,7 @@ public abstract class TwoThreeTreePlayer implements TwoThreeTree {
 
     }
 
-    public void Delete(Node x) {
+    public void DeleteWithNode(Node x) {
         Node<PlayerInTournament> y = x.parent;
 
         if (x == y.left)

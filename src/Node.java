@@ -12,6 +12,16 @@ public class Node<E>
     public Node() {
     }
 
+    public Node(E node_content){
+        this.node_content = node_content;
+        this.parent = null;
+        this.left = null;
+        this.middle = null;
+        this.right = null;
+        this.successor = null;
+        this.predecessor = null;
+    }
+
     public Node(E node_content, Node<E> parent) {
         this.node_content = node_content;
         this.parent = parent;

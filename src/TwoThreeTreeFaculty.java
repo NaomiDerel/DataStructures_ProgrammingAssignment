@@ -71,11 +71,14 @@ public abstract class TwoThreeTreeFaculty implements TwoThreeTree{
     public void Update_Key(Node x){
         Node<FacultyInTournament> y = x;
         y.node_content.faculty.setId(y.left.node_content.faculty.getId());
+        y.node_content.score = y.left.node_content.score;
         if (y.middle != null) {
             y.node_content.faculty.setId(y.middle.node_content.faculty.getId());
+            y.node_content.score = y.middle.node_content.score;
         }
         if (x.right != null) {
             y.node_content.faculty.setId(y.right.node_content.faculty.getId());
+            y.node_content.score = y.right.node_content.score;
         }
     }
 
@@ -141,7 +144,7 @@ public abstract class TwoThreeTreeFaculty implements TwoThreeTree{
 
     }
 
-    public void Delete(Node x) {
+    public void DeleteWithNode(Node x) {
         Node<FacultyInTournament> y = x.parent;
 
         if (x == y.left)

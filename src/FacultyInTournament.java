@@ -6,6 +6,13 @@ public class FacultyInTournament {
     public FacultyInTournament() {
     }
 
+    public FacultyInTournament(Faculty faculty)
+    {
+        this.faculty = faculty;
+        this.score = 0;
+        this.players = new Player[11];
+    }
+
     public FacultyInTournament(Faculty faculty, int score, Player[] players) {
         this.faculty = faculty;
         this.score = score;

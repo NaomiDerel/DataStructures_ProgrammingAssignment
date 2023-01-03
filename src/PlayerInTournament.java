@@ -7,6 +7,8 @@ public class PlayerInTournament {
 
     public PlayerInTournament(Player player) {
         this.player = player;
+        this.goals = 0;
+        this.faculty_id = 0;
     }
 
     public PlayerInTournament(Player player, int goals, int faculty_id) {
