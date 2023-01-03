@@ -35,34 +35,34 @@ public class Main {
 
 
 
-        TwoThreeTreeFacultyByID T = new TwoThreeTreeFacultyByID();
+        TwoThreeTreeFacultyByScoreThenID T = new TwoThreeTreeFacultyByScoreThenID();
         Faculty p1 = new Faculty(5 , "A");
-        FacultyInTournament pit1 = new FacultyInTournament(p1 , 0 , new Player[11]);
+        FacultyInTournament pit1 = new FacultyInTournament(p1 , 8 , new Player[11]);
         Node<FacultyInTournament> npit1= new Node<>(pit1);
         T.Insert(npit1); //so far good
 
         Faculty p2 = new Faculty(6 , "B");
-        FacultyInTournament pit2 = new FacultyInTournament(p2 , 0 , new Player[11]);
+        FacultyInTournament pit2 = new FacultyInTournament(p2 , 6 , new Player[11]);
         Node<FacultyInTournament> npit2= new Node<>(pit2);
         T.Insert(npit2); //so far good
 
         Faculty p3 = new Faculty(7 , "C");
-        FacultyInTournament pit3 = new FacultyInTournament(p3 , 0 , new Player[11]);
+        FacultyInTournament pit3 = new FacultyInTournament(p3 , 6 , new Player[11]);
         Node<FacultyInTournament> npit3= new Node<>(pit3);
         T.Insert(npit3); //so far good
 
         Faculty p4 = new Faculty(3 , "D");
-        FacultyInTournament pit4 = new FacultyInTournament(p4 , 0 , new Player[11]);
+        FacultyInTournament pit4 = new FacultyInTournament(p4 , 1 , new Player[11]);
         Node<FacultyInTournament> npit4= new Node<>(pit4);
         T.Insert(npit4); //so far good
 
         Faculty p5 = new Faculty(4 , "E");
-        FacultyInTournament pit5 = new FacultyInTournament(p5 , 0 , new Player[11]);
+        FacultyInTournament pit5 = new FacultyInTournament(p5 , 7 , new Player[11]);
         Node<FacultyInTournament> npit5= new Node<>(pit5);
         T.Insert(npit5); //so far good
 
-        Node<FacultyInTournament> X = T.search(5);
-        T.Delete_with_id(5);
+        Node<FacultyInTournament> X = T.search(4 , 7);
+        T.DeleteWithGoalsAndID(4,7);
 
         System.out.println(0);
 

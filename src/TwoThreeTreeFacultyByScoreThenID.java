@@ -104,7 +104,7 @@ public class TwoThreeTreeFacultyByScoreThenID extends TwoThreeTreeFaculty{
             return null;
         }
 
-        Node<FacultyInTournament> y = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(0 , null)));
+        Node<FacultyInTournament> y = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(0 , null) , 0 , new Player[11]));
         if (compare(zn , l)== -1){
             Set_Children(x, z, l, null);
             Set_Children(y, m, r, null);
@@ -150,10 +150,16 @@ public class TwoThreeTreeFacultyByScoreThenID extends TwoThreeTreeFaculty{
         }
 
         if (z != null) {
-            Node<FacultyInTournament> w = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(0 , null)));
+            Node<FacultyInTournament> w = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(0 , null) , 0 , new Player[11]));
             Set_Children(w, x, z, null);
             this.root = w;
         }
+    }
+
+    public void DeleteWithGoalsAndID(int id , int goals)
+    {
+        Node<FacultyInTournament> X = this.search(id , goals);
+        DeleteWithNode(X);
     }
 
 }

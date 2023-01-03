@@ -83,7 +83,7 @@ public class TwoThreeTreePlayerByGoalsThenID extends TwoThreeTreePlayer
                 Set_Children(x, l, m, z);
             return null;
         }
-        Node<PlayerInTournament> y = new Node<PlayerInTournament>(new PlayerInTournament(new Player(0 , null)));
+        Node<PlayerInTournament> y = new Node<PlayerInTournament>(new PlayerInTournament(new Player(0 , null) , 0 , 0));
         if (compare(zn , l)== -1){
             Set_Children(x, z, l, null);
             Set_Children(y, m, r, null);
@@ -129,7 +129,7 @@ public class TwoThreeTreePlayerByGoalsThenID extends TwoThreeTreePlayer
         }
 
         if (z != null) {
-            Node<PlayerInTournament> w = new Node<PlayerInTournament>(new PlayerInTournament(new Player(0 , null)));
+            Node<PlayerInTournament> w = new Node<PlayerInTournament>(new PlayerInTournament(new Player(0 , null) , 0 , 0));
             Set_Children(w, x, z, null);
             this.root = w;
         }

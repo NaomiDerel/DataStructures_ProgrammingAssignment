@@ -121,7 +121,7 @@ public class TwoThreeTreeFacultyByID extends TwoThreeTreeFaculty{
         }
     }
 
-    public void Delete_with_id(int id)
+    public void DeleteWithID(int id)
     {
         Node<FacultyInTournament> X = this.search(id);
         DeleteWithNode(X);
