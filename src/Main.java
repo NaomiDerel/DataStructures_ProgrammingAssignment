@@ -4,67 +4,75 @@ public class Main {
 
 
     public static void main(String[] args) {
-//
-//        TwoThreeTreePlayerByID T = new TwoThreeTreePlayerByID();
-//        Player p1 = new Player(5 , "A");
-//        PlayerInTournament pit1 = new PlayerInTournament(p1 , 0 , 10);
-//        Node<PlayerInTournament> npit1= new Node<>(pit1);
-//        T.Insert(npit1); //so far good
-//
-//        Player p2 = new Player(6 , "B");
-//        PlayerInTournament pit2 = new PlayerInTournament(p2 , 0 , 10);
-//        Node<PlayerInTournament> npit2= new Node<>(pit2);
-//        T.Insert(npit2);
-//
-//        Player p3 = new Player(7 , "C");
-//        PlayerInTournament pit3 = new PlayerInTournament(p3 , 0 , 10);
-//        Node<PlayerInTournament> npit3= new Node<>(pit3);
-//        T.Insert(npit3);
-//
-//        Player p4 = new Player(3 , "D");
-//        PlayerInTournament pit4 = new PlayerInTournament(p4 , 0 , 10);
-//        Node<PlayerInTournament> npit4= new Node<>(pit4);
-//        T.Insert(npit4);
-//
-//        Player p5 = new Player(4 , "E");
-//        PlayerInTournament pit5 = new PlayerInTournament(p5 , 0 , 10);
-//        Node<PlayerInTournament> npit5= new Node<>(pit5);
-//        T.Insert(npit5);
-//
-//        Node<PlayerInTournament> X = T.search(5);
 
-
-
-        TwoThreeTreeFacultyByScoreThenID T = new TwoThreeTreeFacultyByScoreThenID();
-        Faculty p1 = new Faculty(5 , "A");
-        FacultyInTournament pit1 = new FacultyInTournament(p1 , 8 , new Player[11]);
-        Node<FacultyInTournament> npit1= new Node<>(pit1);
+        TwoThreeTreePlayerByID T = new TwoThreeTreePlayerByID();
+        Player p1 = new Player(5 , "A");
+        PlayerInTournament pit1 = new PlayerInTournament(p1 , 0 , 10);
+        Node<PlayerInTournament> npit1= new Node<>(pit1);
         T.Insert(npit1); //so far good
 
-        Faculty p2 = new Faculty(6 , "B");
-        FacultyInTournament pit2 = new FacultyInTournament(p2 , 6 , new Player[11]);
-        Node<FacultyInTournament> npit2= new Node<>(pit2);
-        T.Insert(npit2); //so far good
+        Player p2 = new Player(6 , "B");
+        PlayerInTournament pit2 = new PlayerInTournament(p2 , 0 , 10);
+        Node<PlayerInTournament> npit2= new Node<>(pit2);
+        T.Insert(npit2);
 
-        Faculty p3 = new Faculty(7 , "C");
-        FacultyInTournament pit3 = new FacultyInTournament(p3 , 6 , new Player[11]);
-        Node<FacultyInTournament> npit3= new Node<>(pit3);
-        T.Insert(npit3); //so far good
+        Player p3 = new Player(7 , "C");
+        PlayerInTournament pit3 = new PlayerInTournament(p3 , 0 , 10);
+        Node<PlayerInTournament> npit3= new Node<>(pit3);
+        T.Insert(npit3);
 
-        Faculty p4 = new Faculty(3 , "D");
-        FacultyInTournament pit4 = new FacultyInTournament(p4 , 1 , new Player[11]);
-        Node<FacultyInTournament> npit4= new Node<>(pit4);
-        T.Insert(npit4); //so far good
+        Player p4 = new Player(3 , "D");
+        PlayerInTournament pit4 = new PlayerInTournament(p4 , 0 , 10);
+        Node<PlayerInTournament> npit4= new Node<>(pit4);
+        T.Insert(npit4);
 
-        Faculty p5 = new Faculty(4 , "E");
-        FacultyInTournament pit5 = new FacultyInTournament(p5 , 7 , new Player[11]);
-        Node<FacultyInTournament> npit5= new Node<>(pit5);
-        T.Insert(npit5); //so far good
+        Player p5 = new Player(4 , "E");
+        PlayerInTournament pit5 = new PlayerInTournament(p5 , 0 , 10);
+        Node<PlayerInTournament> npit5= new Node<>(pit5);
+        T.Insert(npit5);
 
-        Node<FacultyInTournament> X = T.search(4 , 7);
-        T.DeleteWithGoalsAndID(4,7);
+        Node<PlayerInTournament> X = T.Successor(npit1);
+        Node<PlayerInTournament> Y = T.Predecessor(npit1);
+        Node<PlayerInTournament> Ma = T.max_leaf;
+        Node<PlayerInTournament> Mi = T.min_leaf;
 
         System.out.println(0);
+
+
+
+
+
+
+//        TwoThreeTreeFacultyByScoreThenID T = new TwoThreeTreeFacultyByScoreThenID();
+//        Faculty p1 = new Faculty(5 , "A");
+//        FacultyInTournament pit1 = new FacultyInTournament(p1 , 8 , new Player[11]);
+//        Node<FacultyInTournament> npit1= new Node<>(pit1);
+//        T.Insert(npit1); //so far good
+//
+//        Faculty p2 = new Faculty(6 , "B");
+//        FacultyInTournament pit2 = new FacultyInTournament(p2 , 6 , new Player[11]);
+//        Node<FacultyInTournament> npit2= new Node<>(pit2);
+//        T.Insert(npit2); //so far good
+//
+//        Faculty p3 = new Faculty(7 , "C");
+//        FacultyInTournament pit3 = new FacultyInTournament(p3 , 6 , new Player[11]);
+//        Node<FacultyInTournament> npit3= new Node<>(pit3);
+//        T.Insert(npit3); //so far good
+//
+//        Faculty p4 = new Faculty(3 , "D");
+//        FacultyInTournament pit4 = new FacultyInTournament(p4 , 1 , new Player[11]);
+//        Node<FacultyInTournament> npit4= new Node<>(pit4);
+//        T.Insert(npit4); //so far good
+//
+//        Faculty p5 = new Faculty(4 , "E");
+//        FacultyInTournament pit5 = new FacultyInTournament(p5 , 7 , new Player[11]);
+//        Node<FacultyInTournament> npit5= new Node<>(pit5);
+//        T.Insert(npit5); //so far good
+//
+//        Node<FacultyInTournament> X = T.search(4 , 7);
+//        T.DeleteWithGoalsAndID(4,7);
+//
+//        System.out.println(0);
 
     }
 

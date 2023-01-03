@@ -119,6 +119,13 @@ public class TwoThreeTreeFacultyByID extends TwoThreeTreeFaculty{
             Set_Children(w, x, z, null);
             this.root = w;
         }
+
+        Node<FacultyInTournament> p =  this.Predecessor(zn);
+        zn.predecessor = p;
+        p.successor = zn;
+        Node<FacultyInTournament> s =  this.Successor(zn);
+        zn.successor = s;
+        s.predecessor = zn;
     }
 
     public void DeleteWithID(int id)

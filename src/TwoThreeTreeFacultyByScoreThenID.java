@@ -14,6 +14,8 @@ public class TwoThreeTreeFacultyByScoreThenID extends TwoThreeTreeFaculty{
 
         this.root.left.parent = root;
         this.root.middle.parent = root;
+        this.max_leaf = this.root.middle;
+        this.min_leaf = this.root.left;
     }
 
     @Override
@@ -154,6 +156,14 @@ public class TwoThreeTreeFacultyByScoreThenID extends TwoThreeTreeFaculty{
             Set_Children(w, x, z, null);
             this.root = w;
         }
+
+        Node<FacultyInTournament> p =  this.Predecessor(zn);
+        zn.predecessor = p;
+        p.successor = zn;
+        Node<FacultyInTournament> s =  this.Successor(zn);
+        zn.successor = s;
+        s.predecessor = zn;
+
     }
 
     public void DeleteWithGoalsAndID(int id , int goals)

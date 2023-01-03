@@ -2,6 +2,7 @@ public abstract class TwoThreeTreeFaculty implements TwoThreeTree{
 
     protected Node<FacultyInTournament> root;
     protected Node<FacultyInTournament> max_leaf;
+    protected Node<FacultyInTournament> min_leaf;
 
     public TwoThreeTreeFaculty() {
 
@@ -14,6 +15,8 @@ public abstract class TwoThreeTreeFaculty implements TwoThreeTree{
 
         this.root.left.parent = root;
         this.root.middle.parent = root;
+        this.max_leaf = this.root.middle;
+        this.min_leaf = this.root.left;
     }
 
 
@@ -37,7 +40,7 @@ public abstract class TwoThreeTreeFaculty implements TwoThreeTree{
 
         if (y.node_content.faculty.getId() < Integer.MAX_VALUE)
             return y;
-        else return null;
+        else return this.max_leaf;
     }
 
     public Node<FacultyInTournament> Predecessor(Node x) {
@@ -65,7 +68,7 @@ public abstract class TwoThreeTreeFaculty implements TwoThreeTree{
 
         if (y.node_content.faculty.getId() < Integer.MAX_VALUE)
             return y;
-        else return null;
+        else return this.min_leaf;
     }
 
     public void Update_Key(Node x){

@@ -17,6 +17,8 @@ public class TwoThreeTreePlayerByGoalsThenID extends TwoThreeTreePlayer
 
         this.root.left.parent = root;
         this.root.middle.parent = root;
+        this.max_leaf = this.root.middle;
+        this.min_leaf = this.root.left;
     }
 
     @Override
@@ -133,6 +135,13 @@ public class TwoThreeTreePlayerByGoalsThenID extends TwoThreeTreePlayer
             Set_Children(w, x, z, null);
             this.root = w;
         }
+
+        Node<PlayerInTournament> p =  this.Predecessor(zn);
+        zn.predecessor = p;
+        p.successor = zn;
+        Node<PlayerInTournament> s =  this.Successor(zn);
+        zn.successor = s;
+        s.predecessor = zn;
     }
 
 }
