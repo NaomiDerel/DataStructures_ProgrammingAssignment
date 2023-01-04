@@ -38,9 +38,7 @@ public abstract class TwoThreeTreePlayer implements TwoThreeTree {
             y = y.left;
         }
 
-        if (y.node_content.player.getId() < Integer.MAX_VALUE)//////////////////////////////////////////////////////////////////////////////////////////////
-            return y;
-        else return this.max_leaf;
+        return y;
     }
 
     public Node<PlayerInTournament> Predecessor(Node x) {
@@ -66,9 +64,7 @@ public abstract class TwoThreeTreePlayer implements TwoThreeTree {
                 y = y.middle;
         }
 
-        if (y.node_content.player.getId() < Integer.MAX_VALUE)/////////////////////////////////////////////////////////////////////////////////
-            return y;
-        else return this.min_leaf;
+        return y;
     }
 
     public void Update_Key(Node x){

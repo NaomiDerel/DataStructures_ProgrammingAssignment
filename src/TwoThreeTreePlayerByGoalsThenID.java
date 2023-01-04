@@ -68,7 +68,6 @@ public class TwoThreeTreePlayerByGoalsThenID extends TwoThreeTreePlayer
     }
 
 
-
     public Node Insert_And_Split(Node x,Node z){
         Node<PlayerInTournament> xn = x;
         Node<PlayerInTournament> zn = z;
