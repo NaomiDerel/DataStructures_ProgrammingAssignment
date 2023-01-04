@@ -38,7 +38,7 @@ public abstract class TwoThreeTreePlayer implements TwoThreeTree {
             y = y.left;
         }
 
-        if (y.node_content.player.getId() < Integer.MAX_VALUE)//////////////////////////////////////
+        if (y.node_content.player.getId() < Integer.MAX_VALUE)//////////////////////////////////////////////////////////////////////////////////////////////
             return y;
         else return this.max_leaf;
     }
@@ -66,7 +66,7 @@ public abstract class TwoThreeTreePlayer implements TwoThreeTree {
                 y = y.middle;
         }
 
-        if (y.node_content.player.getId() < Integer.MAX_VALUE)///////////////////////////////////////
+        if (y.node_content.player.getId() < Integer.MAX_VALUE)/////////////////////////////////////////////////////////////////////////////////
             return y;
         else return this.min_leaf;
     }
