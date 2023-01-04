@@ -1,4 +1,4 @@
-public class TwoThreeTreePlayerByID extends TwoThreeTreePlayer {
+public class PlayerByIDTree extends PlayerTree {
     public int compare(Node x , Node y) { // compare x , y , return 1 if x>1 , 0 if x = y , -1 if x<y
         Node<PlayerInTournament> xn = new Node<PlayerInTournament>((PlayerInTournament)x.node_content , x.parent);
         Node<PlayerInTournament> yn = new Node<PlayerInTournament>((PlayerInTournament)y.node_content , y.parent);

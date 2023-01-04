@@ -1,15 +1,15 @@
-public class TwoThreeTreeFacultyByScoreThenID extends TwoThreeTreeFaculty{
+public class FacultyByScoreThenIDTree extends FacultyTree {
 
 
-    public TwoThreeTreeFacultyByScoreThenID() {
+    public FacultyByScoreThenIDTree() {
         //we need other construction becase the positive sentinal needs
         // to have infinite score and -infinte id so it would be maximal
 
-        this.root = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(Integer.MAX_VALUE, null), 0 ,  new Player[11]) , null);
+        this.root = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(Integer.MAX_VALUE, null), 0 ,  new PlayerInTournament[11]) , null);
 
-        this.root.left = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(Integer.MAX_VALUE, null), Integer.MIN_VALUE ,  new Player[11]) , null);
+        this.root.left = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(Integer.MAX_VALUE, null), Integer.MIN_VALUE ,  new PlayerInTournament[11]) , null);
 
-        this.root.middle = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(Integer.MIN_VALUE, null), Integer.MAX_VALUE ,  new Player[11]) , null);
+        this.root.middle = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(Integer.MIN_VALUE, null), Integer.MAX_VALUE ,  new PlayerInTournament[11]) , null);
         this.root.right = null;
 
         this.root.left.parent = root;
@@ -75,7 +75,7 @@ public class TwoThreeTreeFacultyByScoreThenID extends TwoThreeTreeFaculty{
             return n;
         }
 
-        Node<FacultyInTournament> temp = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(id , null) , score , new Player[11]));
+        Node<FacultyInTournament> temp = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(id , null) , score , new PlayerInTournament[11]));
 
         if (compare(temp , n.left) <= 0) {
             return searchInner(id, score , n.left);
@@ -106,7 +106,7 @@ public class TwoThreeTreeFacultyByScoreThenID extends TwoThreeTreeFaculty{
             return null;
         }
 
-        Node<FacultyInTournament> y = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(0 , null) , 0 , new Player[11]));
+        Node<FacultyInTournament> y = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(0 , null) , 0 , new PlayerInTournament[11]));
         if (compare(zn , l)== -1){
             Set_Children(x, z, l, null);
             Set_Children(y, m, r, null);
@@ -152,7 +152,7 @@ public class TwoThreeTreeFacultyByScoreThenID extends TwoThreeTreeFaculty{
         }
 
         if (z != null) {
-            Node<FacultyInTournament> w = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(0 , null) , 0 , new Player[11]));
+            Node<FacultyInTournament> w = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(0 , null) , 0 , new PlayerInTournament[11]));
             Set_Children(w, x, z, null);
             this.root = w;
         }

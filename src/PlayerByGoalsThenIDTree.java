@@ -1,9 +1,9 @@
-public class TwoThreeTreePlayerByGoalsThenID extends TwoThreeTreePlayer
+public class PlayerByGoalsThenIDTree extends PlayerTree
 {
 
 
 
-    public TwoThreeTreePlayerByGoalsThenID() {
+    public PlayerByGoalsThenIDTree() {
         //we need other construction because the positive sentinal needs
         // to have infinite score and -infinte id so it would be maximal
 
@@ -65,6 +65,31 @@ public class TwoThreeTreePlayerByGoalsThenID extends TwoThreeTreePlayer
             }
         }
         return -1;
+    }
+
+    public Node search(int id , int goals)
+    {
+        Node<PlayerInTournament> X = this.root;
+        return searchInner(id, goals , X);
+    }
+    public Node searchInner(int id, int goals , Node X) {
+        Node<PlayerInTournament> n = X;
+
+        if (id == n.node_content.player.getId() && n.left == null) {
+            return n;
+        }
+
+        Node<PlayerInTournament> temp = new Node<PlayerInTournament>(new PlayerInTournament(new Player(id , null) , goals , 0));
+
+        if (compare(temp , n.left) <= 0) {
+            return searchInner(id, goals , n.left);
+        }
+
+        if (compare(temp , n.middle) <= 0) {
+            return searchInner(id, goals , n.middle);
+        }
+
+        return searchInner(id, goals , n.right);
     }
 
 

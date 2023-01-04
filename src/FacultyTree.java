@@ -1,16 +1,16 @@
-public abstract class TwoThreeTreePlayer implements TwoThreeTree {
-    protected Node<PlayerInTournament> root;
-    protected Node<PlayerInTournament> max_leaf;
-    protected Node<PlayerInTournament> min_leaf;
+public abstract class FacultyTree implements TwoThreeTree{
 
-    public TwoThreeTreePlayer() {
+    protected Node<FacultyInTournament> root;
+    protected Node<FacultyInTournament> max_leaf;
+    protected Node<FacultyInTournament> min_leaf;
 
-        this.root = new Node<PlayerInTournament>(new PlayerInTournament(new Player(Integer.MAX_VALUE, null), 0 ,  0)  , null);
+    public FacultyTree() {
 
-        this.root.left = new Node<PlayerInTournament>(new PlayerInTournament(new Player(Integer.MIN_VALUE, null), Integer.MIN_VALUE ,  0)  , null);
+        this.root = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(Integer.MAX_VALUE, null), 0 ,  new PlayerInTournament[11]) , null);
 
+        this.root.left = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(Integer.MIN_VALUE, null), Integer.MIN_VALUE ,  new PlayerInTournament[11]) , null);
 
-        this.root.middle = new Node<PlayerInTournament>(new PlayerInTournament(new Player(Integer.MAX_VALUE, null), Integer.MAX_VALUE ,  0)  , null);
+        this.root.middle = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(Integer.MAX_VALUE, null), Integer.MAX_VALUE ,  new PlayerInTournament[11]) , null);
         this.root.right = null;
 
         this.root.left.parent = root;
@@ -20,9 +20,9 @@ public abstract class TwoThreeTreePlayer implements TwoThreeTree {
     }
 
 
-    public Node<PlayerInTournament> Successor(Node x) {
-        Node<PlayerInTournament> y;
-        Node<PlayerInTournament> z = x.parent;
+    public Node<FacultyInTournament> Successor(Node x) {
+        Node<FacultyInTournament> y;
+        Node<FacultyInTournament> z = x.parent;
 
         while (x == z.right || (z.right == null && x == z.middle)) {
             x = z;
@@ -38,12 +38,14 @@ public abstract class TwoThreeTreePlayer implements TwoThreeTree {
             y = y.left;
         }
 
+
         return y;
+
     }
 
-    public Node<PlayerInTournament> Predecessor(Node x) {
-        Node<PlayerInTournament> y;
-        Node<PlayerInTournament> z = x.parent;
+    public Node<FacultyInTournament> Predecessor(Node x) {
+        Node<FacultyInTournament> y;
+        Node<FacultyInTournament> z = x.parent;
 
         while (x == z.left) {
             x = z;
@@ -68,16 +70,16 @@ public abstract class TwoThreeTreePlayer implements TwoThreeTree {
     }
 
     public void Update_Key(Node x){
-        Node<PlayerInTournament> y = x;
-        y.node_content.player.setId(y.left.node_content.player.getId());
-        y.node_content.goals = y.left.node_content.goals;
+        Node<FacultyInTournament> y = x;
+        y.node_content.faculty.setId(y.left.node_content.faculty.getId());
+        y.node_content.score = y.left.node_content.score;
         if (y.middle != null) {
-            y.node_content.player.setId(y.middle.node_content.player.getId());
-            y.node_content.goals = y.middle.node_content.goals;
+            y.node_content.faculty.setId(y.middle.node_content.faculty.getId());
+            y.node_content.score = y.middle.node_content.score;
         }
         if (x.right != null) {
-            y.node_content.player.setId(y.right.node_content.player.getId());
-            y.node_content.goals = y.right.node_content.goals;
+            y.node_content.faculty.setId(y.right.node_content.faculty.getId());
+            y.node_content.score = y.right.node_content.score;
         }
     }
 
@@ -96,10 +98,10 @@ public abstract class TwoThreeTreePlayer implements TwoThreeTree {
 
     public Node borrowOrMerge(Node y)
     {
-        Node<PlayerInTournament> z = y.parent;
+        Node<FacultyInTournament> z = y.parent;
         if (y==z.left)
         {
-            Node<PlayerInTournament> x = z.middle;
+            Node<FacultyInTournament> x = z.middle;
             if (x.right != null)
             {
                 Set_Children(y, y.left, x.left, null);
@@ -115,7 +117,7 @@ public abstract class TwoThreeTreePlayer implements TwoThreeTree {
 
         if (y==z.middle)
         {
-            Node<PlayerInTournament> x = z.left;
+            Node<FacultyInTournament> x = z.left;
             if (x.right != null)
             {
                 Set_Children(y, x.right, y.left, null);
@@ -128,7 +130,7 @@ public abstract class TwoThreeTreePlayer implements TwoThreeTree {
             }
             return z;
         }
-        Node<PlayerInTournament> x = z.middle;
+        Node<FacultyInTournament> x = z.middle;
         if (x.right != null)
         {
             Set_Children(y, x.right , y.left , null);
@@ -144,7 +146,7 @@ public abstract class TwoThreeTreePlayer implements TwoThreeTree {
     }
 
     public void DeleteWithNode(Node x) {
-        Node<PlayerInTournament> y = x.parent;
+        Node<FacultyInTournament> y = x.parent;
 
         if (x == y.left)
             Set_Children(y, y.middle, y.right, null);
@@ -169,4 +171,5 @@ public abstract class TwoThreeTreePlayer implements TwoThreeTree {
             }
         }
     }
+
 }

@@ -1,7 +1,7 @@
 public class FacultyInTournament {
     protected Faculty faculty;
     protected int score;
-    protected Player[] players;
+    protected PlayerInTournament[] players;
 
     public FacultyInTournament() {
     }
@@ -10,10 +10,10 @@ public class FacultyInTournament {
     {
         this.faculty = faculty;
         this.score = 0;
-        this.players = new Player[11];
+        this.players = new PlayerInTournament[11];
     }
 
-    public FacultyInTournament(Faculty faculty, int score, Player[] players) {
+    public FacultyInTournament(Faculty faculty, int score, PlayerInTournament[] players) {
         this.faculty = faculty;
         this.score = score;
         this.players = players;
@@ -27,7 +27,7 @@ public class FacultyInTournament {
         return score;
     }
 
-    public Player[] getPlayers() {
+    public PlayerInTournament[] getPlayers() {
         return players;
     }
 
@@ -35,7 +35,7 @@ public class FacultyInTournament {
         this.score = score;
     }
 
-    public void setPlayers(Player[] players) {
+    public void setPlayers(PlayerInTournament[] players) {
         this.players = players;
     }
 }

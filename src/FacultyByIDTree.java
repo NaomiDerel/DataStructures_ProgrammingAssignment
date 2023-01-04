@@ -1,7 +1,7 @@
-public class TwoThreeTreeFacultyByID extends TwoThreeTreeFaculty{
+public class FacultyByIDTree extends FacultyTree {
 
 
-    public TwoThreeTreeFacultyByID() {
+    public FacultyByIDTree() {
     }
 
 

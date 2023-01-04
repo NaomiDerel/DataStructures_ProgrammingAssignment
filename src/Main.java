@@ -1,11 +1,9 @@
-import java.util.*;
-import java.lang.AssertionError;
 public class Main {
 
 
     public static void main(String[] args) {
 
-        TwoThreeTreePlayerByID T = new TwoThreeTreePlayerByID();
+        PlayerByIDTree T = new PlayerByIDTree();
         Player p1 = new Player(5 , "A");
         PlayerInTournament pit1 = new PlayerInTournament(p1 , 0 , 10);
         Node<PlayerInTournament> npit1= new Node<>(pit1);
