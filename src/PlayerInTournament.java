@@ -16,4 +16,8 @@ public class PlayerInTournament {
         this.goals = goals;
         this.faculty_id = faculty_id;
     }
+
+    public void updateGoalsBy(int goal) {
+        this.goals += goal;
+    }
 }

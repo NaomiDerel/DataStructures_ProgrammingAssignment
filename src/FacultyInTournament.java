@@ -31,8 +31,8 @@ public class FacultyInTournament {
         return players;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void updateScoreBy(int score) {
+        this.score += score;
     }
 
     public void setPlayers(PlayerInTournament[] players) {

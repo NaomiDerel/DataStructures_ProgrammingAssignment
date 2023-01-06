@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class TechnionTournament implements Tournament{
 
-    TechnionTournament(){};
+    TechnionTournament(){}
     protected FacultyByIDTree facultyByIDTree;
     protected FacultyByScoreThenIDTree facultyByScoreThenIDTree;
     protected PlayerByIDTree playerByIDTree;
@@ -21,9 +21,9 @@ public class TechnionTournament implements Tournament{
     @Override
     public void addFacultyToTournament(Faculty faculty) {
         FacultyInTournament newFaculty1 = new FacultyInTournament(faculty);
-        Node<FacultyInTournament> newFacultyNode1 = new Node<FacultyInTournament>(newFaculty1);
+        Node<FacultyInTournament> newFacultyNode1 = new Node<>(newFaculty1);
         FacultyInTournament newFaculty2 = new FacultyInTournament(faculty);
-        Node<FacultyInTournament> newFacultyNode2 = new Node<FacultyInTournament>(newFaculty2);
+        Node<FacultyInTournament> newFacultyNode2 = new Node<>(newFaculty2);
         this.facultyByIDTree.Insert(newFacultyNode1);
         this.facultyByScoreThenIDTree.Insert(newFacultyNode2);
     }
@@ -66,17 +66,17 @@ public class TechnionTournament implements Tournament{
     @Override
     public void addPlayerToFaculty(int faculty_id,Player player) {
         PlayerInTournament pit1 = new PlayerInTournament(player , 0 , faculty_id);
-        Node<PlayerInTournament> npit1 = new Node<PlayerInTournament>(pit1);
+        Node<PlayerInTournament> new_pit1 = new Node<PlayerInTournament>(pit1);
         PlayerInTournament pit2 = new PlayerInTournament(player , 0 , faculty_id);
-        Node<PlayerInTournament> npit2 = new Node<PlayerInTournament>(pit2);
+        Node<PlayerInTournament> new_pit2 = new Node<PlayerInTournament>(pit2);
 
-        this.playerByIDTree.Insert(npit1);
-        this.playerByGoalsThenIDTree.Insert(npit2);
+        this.playerByIDTree.Insert(new_pit1);
+        this.playerByGoalsThenIDTree.Insert(new_pit2);
 
-        Node<FacultyInTournament> nfit  = this.facultyByIDTree.search(faculty_id);
-        int score = nfit.node_content.score;
+        Node<FacultyInTournament> new_fit  = this.facultyByIDTree.search(faculty_id);
+        int score = new_fit.node_content.score;
 
-        PlayerInTournament[] players = nfit.node_content.players;
+        PlayerInTournament[] players = new_fit.node_content.players;
         for(int i = 0 ; i < 11 ; i++)
         {
             if (players[i] == null)
@@ -86,8 +86,8 @@ public class TechnionTournament implements Tournament{
             }
         }
 
-        nfit = this.facultyByScoreThenIDTree.search(faculty_id , score);
-        players = nfit.node_content.players;
+        new_fit = this.facultyByScoreThenIDTree.search(faculty_id , score);
+        players = new_fit.node_content.players;
         for(int i = 0 ; i < 11 ; i++)
         {
             if (players[i] == null)
@@ -135,32 +135,139 @@ public class TechnionTournament implements Tournament{
     public void playGame(int faculty_id1, int faculty_id2, int winner,
                          ArrayList<Integer> faculty1_goals, ArrayList<Integer> faculty2_goals) {
 
+        //Update faculty tree by id
+        Node<FacultyInTournament> fid1 = this.facultyByIDTree.search(faculty_id1);
+        Node<FacultyInTournament> fid2 = this.facultyByIDTree.search(faculty_id2);
+
+        int prev_score1 = fid1.node_content.score;
+        int prev_score2 = fid2.node_content.score;
+
+        PlayerInTournament[] players1 = fid1.node_content.players;
+        PlayerInTournament[] players2 = fid2.node_content.players;
+
+        if (winner == 1)
+            fid1.node_content.updateScoreBy(3);
+        else if (winner == 2)
+            fid2.node_content.updateScoreBy(3);
+        else if (winner == 0) {
+            fid1.node_content.updateScoreBy(1);
+            fid2.node_content.updateScoreBy(1);
+        }
+
+        //Update faculty tree by score
+        FacultyInTournament newFaculty1 = new FacultyInTournament(new Faculty(faculty_id1, fid1.node_content.faculty.getName()), prev_score1, players1);
+        Node<FacultyInTournament> newFacultyNode1 = new Node<>(newFaculty1);
+
+        FacultyInTournament newFaculty2 = new FacultyInTournament(new Faculty(faculty_id2, fid2.node_content.faculty.getName()), prev_score2, players2);
+        Node<FacultyInTournament> newFacultyNode2 = new Node<>(newFaculty2);
+        this.facultyByScoreThenIDTree.Insert(newFacultyNode2);
+
+        if (winner == 1) {
+            newFacultyNode1.node_content.updateScoreBy(3);
+            this.facultyByScoreThenIDTree.DeleteWithGoalsAndID(faculty_id1, prev_score1);
+            this.facultyByScoreThenIDTree.Insert(newFacultyNode1);
+        }
+        else if (winner == 2) {
+            newFacultyNode2.node_content.updateScoreBy(3);
+            this.facultyByScoreThenIDTree.DeleteWithGoalsAndID(faculty_id2, prev_score2);
+            this.facultyByScoreThenIDTree.Insert(newFacultyNode2);
+        }
+        else if (winner == 0) {
+            newFacultyNode1.node_content.updateScoreBy(1);
+            this.facultyByScoreThenIDTree.DeleteWithGoalsAndID(faculty_id1, prev_score1);
+            this.facultyByScoreThenIDTree.Insert(newFacultyNode1);
+
+            newFacultyNode2.node_content.updateScoreBy(1);
+            this.facultyByScoreThenIDTree.DeleteWithGoalsAndID(faculty_id2, prev_score2);
+            this.facultyByScoreThenIDTree.Insert(newFacultyNode2);
+        }
+
+        //Update player tree by id
+
+        for (int id : faculty1_goals) {
+            Node<PlayerInTournament> p = this.playerByIDTree.search(id);
+            int prev_goals = p.node_content.goals;
+            p.node_content.updateGoalsBy(1);
+
+            p = this.playerByGoalsThenIDTree.search(id, prev_goals);
+            p.node_content.updateGoalsBy(1);
+        }
+
+        for (int id : faculty2_goals) {
+            Node<PlayerInTournament> p = this.playerByIDTree.search(id);
+            int prev_goals = p.node_content.goals;
+            p.node_content.updateGoalsBy(1);
+
+            p = this.playerByGoalsThenIDTree.search(id, prev_goals);
+            p.node_content.updateGoalsBy(1);
+        }
+
     }
 
     @Override
     public void getTopScorer(Player player) {
-
+        Node<PlayerInTournament> player_node = this.playerByGoalsThenIDTree.max_leaf.predecessor;
+        Player top_player = player_node.node_content.player;
+        player.setName(top_player.getName());
+        player.setId(top_player.getId());
     }
 
     @Override
     public void getTopScorerInFaculty(int faculty_id, Player player) {
-
+        Node<FacultyInTournament> fid1 = this.facultyByIDTree.search(faculty_id);
+        PlayerInTournament top_player = fid1.node_content.players[0];
+        if(top_player != null) {
+            player.setName(top_player.player.getName());
+            player.setId(top_player.player.getId());
+        }
+        else //?
+            player = null;
     }
 
     @Override
     public void getTopKFaculties(ArrayList<Faculty> faculties, int k, boolean ascending) {
+        ArrayList<Faculty> top_k = new ArrayList<>();
+        Node<FacultyInTournament> x = this.facultyByScoreThenIDTree.max_leaf; //sentinel
 
+        for(int i=0; i<k; i++){
+            x = x.predecessor;
+            top_k.add(x.node_content.faculty);
+        }
+
+        if (!ascending)
+            faculties.addAll(top_k);
+        else {
+            for(int i=k-1; i>=0; i--) {
+                faculties.add(top_k.remove(i));
+            }
+        }
     }
 
     @Override
     public void getTopKScorers(ArrayList<Player> players, int k, boolean ascending) {
+        ArrayList<Player> top_k = new ArrayList<>();
+        Node<PlayerInTournament> x = this.playerByGoalsThenIDTree.max_leaf; //sentinel
 
+        for(int i=0; i<k; i++){
+            x = x.predecessor;
+            top_k.add(x.node_content.player);
+        }
+
+        if (!ascending)
+            players.addAll(top_k);
+        else {
+            for(int i=k-1; i>=0; i--) {
+                players.add(top_k.remove(i));
+            }
+        }
     }
 
     @Override
     public void getTheWinner(Faculty faculty) {
-
+        Node<FacultyInTournament> faculty_node = this.facultyByScoreThenIDTree.max_leaf.predecessor;
+        Faculty top_faculty = faculty_node.node_content.faculty;
+        faculty.setName(top_faculty.getName());
+        faculty.setId(top_faculty.getId());
     }
 
-    ///TODO - add below your own variables and methods
 }
