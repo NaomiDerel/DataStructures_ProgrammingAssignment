@@ -92,6 +92,7 @@ public class FacultyByIDTree extends FacultyTree {
     public void Insert (Node z) {
 
         Node<FacultyInTournament> zn = z;
+
         Node<FacultyInTournament> y = this.root;
         Node<FacultyInTournament> x;
 
@@ -105,7 +106,7 @@ public class FacultyByIDTree extends FacultyTree {
         }
 
         x = y.parent;
-        z = Insert_And_Split(x, z);
+        z = Insert_And_Split(x, zn);
 
         while (x != this.root) {
             x = x.parent;

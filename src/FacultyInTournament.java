@@ -38,4 +38,22 @@ public class FacultyInTournament {
     public void setPlayers(PlayerInTournament[] players) {
         this.players = players;
     }
+
+    public Player findMax()
+    {
+        PlayerInTournament[] players = this.players;
+        PlayerInTournament max = players[0];
+        for(int i = 1 ; i < 11 && players[i] != null ; i++)
+        {
+            if (players[i].goals > max.goals)
+            {
+                max = players[i];
+            }
+        }
+        return max.player;
+    }
+
+
+
+
 }

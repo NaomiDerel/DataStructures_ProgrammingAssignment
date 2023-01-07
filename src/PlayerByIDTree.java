@@ -88,6 +88,7 @@ public class PlayerByIDTree extends PlayerTree {
     public void Insert (Node z) {
 
         Node<PlayerInTournament> zn = z;
+
         Node<PlayerInTournament> y = this.root;
         Node<PlayerInTournament> x;
 
@@ -101,7 +102,7 @@ public class PlayerByIDTree extends PlayerTree {
         }
 
         x = y.parent;
-        z = Insert_And_Split(x, z);
+        z = Insert_And_Split(x, zn);
 
         while (x != this.root) {
             x = x.parent;

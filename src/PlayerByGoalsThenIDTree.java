@@ -7,8 +7,7 @@ public class PlayerByGoalsThenIDTree extends PlayerTree
         //we need other construction because the positive sentinal needs
         // to have infinite score and -infinte id so it would be maximal
 
-        //this.root = new Node<PlayerInTournament>(new PlayerInTournament(new Player(Integer.MIN_VALUE, null), Integer.MAX_VALUE ,  0)  , null);
-        this.root = new Node<PlayerInTournament>(new PlayerInTournament(new Player(Integer.MAX_VALUE, null), 0 ,  0)  , null);
+        this.root = new Node<PlayerInTournament>(new PlayerInTournament(new Player(Integer.MIN_VALUE, null), Integer.MAX_VALUE ,  0)  , null);
         this.root.left = new Node<PlayerInTournament>(new PlayerInTournament(new Player(Integer.MAX_VALUE, null), Integer.MIN_VALUE ,  0)  , null);
         this.root.middle = new Node<PlayerInTournament>(new PlayerInTournament(new Player(Integer.MIN_VALUE, null), Integer.MAX_VALUE ,  0)  , null);
         this.root.right = null;
@@ -130,6 +129,7 @@ public class PlayerByGoalsThenIDTree extends PlayerTree
     public void Insert (Node z) {
 
         Node<PlayerInTournament> zn = z;
+
         Node<PlayerInTournament> y = this.root;
         Node<PlayerInTournament> x;
 
@@ -144,7 +144,7 @@ public class PlayerByGoalsThenIDTree extends PlayerTree
         }
 
         x = y.parent;
-        z = Insert_And_Split(x, z);
+        z = Insert_And_Split(x, zn);
 
         while (x != this.root) {
             x = x.parent;
@@ -165,6 +165,12 @@ public class PlayerByGoalsThenIDTree extends PlayerTree
         Node<PlayerInTournament> s =  this.Successor(zn);
         zn.successor = s;
         s.predecessor = zn;
+    }
+
+    public void DeleteWithGoalsAndID(int id , int goals)
+    {
+        Node<PlayerInTournament> X = this.search(id , goals);
+        DeleteWithNode(X);
     }
 
 }

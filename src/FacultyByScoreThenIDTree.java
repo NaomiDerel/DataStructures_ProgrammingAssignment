@@ -5,7 +5,7 @@ public class FacultyByScoreThenIDTree extends FacultyTree {
         //we need other construction becase the positive sentinal needs
         // to have infinite score and -infinte id so it would be maximal
 
-        this.root = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(Integer.MAX_VALUE, null), 0 ,  new PlayerInTournament[11]) , null);
+        this.root = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(Integer.MIN_VALUE, null), Integer.MAX_VALUE ,  new PlayerInTournament[11]) , null);
 
         this.root.left = new Node<FacultyInTournament>(new FacultyInTournament(new Faculty(Integer.MAX_VALUE, null), Integer.MIN_VALUE ,  new PlayerInTournament[11]) , null);
 
@@ -129,6 +129,7 @@ public class FacultyByScoreThenIDTree extends FacultyTree {
     public void Insert (Node z) {
 
         Node<FacultyInTournament> zn = z;
+
         Node<FacultyInTournament> y = this.root;
         Node<FacultyInTournament> x;
 
@@ -142,7 +143,7 @@ public class FacultyByScoreThenIDTree extends FacultyTree {
         }
 
         x = y.parent;
-        z = Insert_And_Split(x, z);
+        z = Insert_And_Split(x, zn);
 
         while (x != this.root) {
             x = x.parent;
