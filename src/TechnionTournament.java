@@ -8,52 +8,65 @@ public class TechnionTournament implements Tournament{
     protected PlayerByIDTree playerByIDTree;
     protected PlayerByGoalsThenIDTree playerByGoalsThenIDTree;
 
-
+    /**
+     Initialize the 4 data structures we need to maintain the tournament.
+     */
     @Override
     public void init() {
         this.facultyByIDTree = new FacultyByIDTree();
         this.facultyByScoreThenIDTree = new FacultyByScoreThenIDTree();
         this.playerByIDTree = new PlayerByIDTree();
         this.playerByGoalsThenIDTree = new PlayerByGoalsThenIDTree();
-
     }
 
+    /**
+     * Add the new faculty to the tournament, by updating the data structures in charge of faculties.
+     * @param faculty - new faculty with id and name.
+     */
     @Override
     public void addFacultyToTournament(Faculty faculty) {
         FacultyInTournament newFaculty1 = new FacultyInTournament(faculty);
         Node<FacultyInTournament> newFacultyNode1 = new Node<>(newFaculty1);
+        this.facultyByIDTree.Insert(newFacultyNode1);
+
         FacultyInTournament newFaculty2 = new FacultyInTournament(faculty);
         Node<FacultyInTournament> newFacultyNode2 = new Node<>(newFaculty2);
-        this.facultyByIDTree.Insert(newFacultyNode1);
         this.facultyByScoreThenIDTree.Insert(newFacultyNode2);
     }
 
+    /**
+     * Remove the faculty matching faculty_id key (id is unique) from the tournament,
+     * by removing it from the data structures in charge of faculties.
+     * Update the players in the faculty to be free agents.
+     *
+     * @param faculty_id - faculty identifier.
+     */
     @Override
     public void removeFacultyFromTournament(int faculty_id){
         Node<FacultyInTournament> wanted = this.facultyByIDTree.search(faculty_id);
-        PlayerInTournament[] players = wanted.node_content.players;
-        for (int i = 0 ; i < 11 && players[i] != null ; i++)
-        {
-            players[i].faculty_id = 0;
-        }
-        this.facultyByIDTree.DeleteWithID(faculty_id);
-
+//        PlayerInTournament[] players = wanted.node_content.players;
+//        for (int i = 0 ; i < 11 && players[i] != null ; i++)
+//        {
+//            players[i].faculty_id = 0;
+//        }
 
         int wID = wanted.node_content.faculty.getId();
         int wGoals = wanted.node_content.score;
-        wanted = this.facultyByScoreThenIDTree.search(wID , wGoals);
-        players = wanted.node_content.players;
-        for (int i = 0 ; i < 11 && players[i] != null ; i++)
-        {
-            players[i].faculty_id = 0;
-        }
+        PlayerInTournament[] players = wanted.node_content.players;
+
+//        wanted = this.facultyByScoreThenIDTree.search(wID , wGoals);
+//        for (int i = 0 ; i < 11 && players[i] != null ; i++)
+//        {
+//            players[i].faculty_id = 0;
+//        }
+
+        this.facultyByIDTree.DeleteWithID(faculty_id);
         this.facultyByScoreThenIDTree.DeleteWithGoalsAndID(wID, wGoals);
 
 
         for (int i = 0 ; i < 11 && players[i] != null ; i++)
         {
             int pID = players[i].player.getId();
-
             Node<PlayerInTournament> np = this.playerByIDTree.search(pID);
             np.node_content.faculty_id = 0;
             int pg = np.node_content.goals;
@@ -104,13 +117,19 @@ public class TechnionTournament implements Tournament{
     public void removePlayerFromFaculty(int faculty_id, int player_id) {
 
         Node<FacultyInTournament> f = this.facultyByIDTree.search(faculty_id);
-        int score= f.node_content.score;
+        int score = f.node_content.score;
         PlayerInTournament[] players = f.node_content.players;
+
+        boolean found = false;
         for (int i = 0; i < 11 ; i++)
         {
-            if(players[i].player.getId() == player_id){
+            if (players[i] != null && players[i].player.getId() == player_id) {
                 players[i] = null;
-                break;
+                found = true;
+            }
+            else if(found) {
+                players[i-1] = players[i];
+                players[i] = null;
             }
         }
 
