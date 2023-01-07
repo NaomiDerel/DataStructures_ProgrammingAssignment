@@ -136,29 +136,29 @@ public class TechnionTournament implements Tournament{
                          ArrayList<Integer> faculty1_goals, ArrayList<Integer> faculty2_goals) {
 
         //Update faculty tree by id
-        Node<FacultyInTournament> fid1 = this.facultyByIDTree.search(faculty_id1);
-        Node<FacultyInTournament> fid2 = this.facultyByIDTree.search(faculty_id2);
+        Node<FacultyInTournament> f1 = this.facultyByIDTree.search(faculty_id1);
+        Node<FacultyInTournament> f2 = this.facultyByIDTree.search(faculty_id2);
 
-        int prev_score1 = fid1.node_content.score;
-        int prev_score2 = fid2.node_content.score;
+        int prev_score1 = f1.node_content.score;
+        int prev_score2 = f2.node_content.score;
 
-        PlayerInTournament[] players1 = fid1.node_content.players;
-        PlayerInTournament[] players2 = fid2.node_content.players;
+        PlayerInTournament[] players1 = f1.node_content.players;
+        PlayerInTournament[] players2 = f2.node_content.players;
 
         if (winner == 1)
-            fid1.node_content.updateScoreBy(3);
+            f1.node_content.updateScoreBy(3);
         else if (winner == 2)
-            fid2.node_content.updateScoreBy(3);
+            f2.node_content.updateScoreBy(3);
         else if (winner == 0) {
-            fid1.node_content.updateScoreBy(1);
-            fid2.node_content.updateScoreBy(1);
+            f1.node_content.updateScoreBy(1);
+            f2.node_content.updateScoreBy(1);
         }
 
         //Update faculty tree by score
-        FacultyInTournament newFaculty1 = new FacultyInTournament(new Faculty(faculty_id1, fid1.node_content.faculty.getName()), prev_score1, players1);
+        FacultyInTournament newFaculty1 = new FacultyInTournament(new Faculty(faculty_id1, f1.node_content.faculty.getName()), prev_score1, players1);
         Node<FacultyInTournament> newFacultyNode1 = new Node<>(newFaculty1);
 
-        FacultyInTournament newFaculty2 = new FacultyInTournament(new Faculty(faculty_id2, fid2.node_content.faculty.getName()), prev_score2, players2);
+        FacultyInTournament newFaculty2 = new FacultyInTournament(new Faculty(faculty_id2, f2.node_content.faculty.getName()), prev_score2, players2);
         Node<FacultyInTournament> newFacultyNode2 = new Node<>(newFaculty2);
         this.facultyByScoreThenIDTree.Insert(newFacultyNode2);
 

@@ -138,8 +138,9 @@ public class PlayerByGoalsThenIDTree extends PlayerTree
                 y = y.left;
             else if (compare(zn , y.middle)== -1)
                 y = y.middle;
-            else
+            else {
                 y = y.right;
+            }
         }
 
         x = y.parent;
