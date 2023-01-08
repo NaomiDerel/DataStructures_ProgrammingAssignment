@@ -144,6 +144,12 @@ public abstract class PlayerTree implements TwoThreeTree {
     }
 
     public void DeleteWithNode(Node x) {
+
+        Node<FacultyInTournament> X_predecessor = x.predecessor;
+        Node<FacultyInTournament> X_successor = x.successor;
+        X_successor.setPredecessor(X_predecessor);
+        X_predecessor.setSuccessor(X_successor);
+
         Node<PlayerInTournament> y = x.parent;
 
         if (x == y.left)
