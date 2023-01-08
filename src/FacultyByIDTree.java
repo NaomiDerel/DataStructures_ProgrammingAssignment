@@ -132,6 +132,12 @@ public class FacultyByIDTree extends FacultyTree {
     public void DeleteWithID(int id)
     {
         Node<FacultyInTournament> X = this.search(id);
+        Node<FacultyInTournament> X_predecessor = X.predecessor;
+        Node<FacultyInTournament> X_successor = X.successor;
+
+        X_successor.setPredecessor(X_predecessor);
+        X_predecessor.setSuccessor(X_successor);
+
         DeleteWithNode(X);
     }
 }

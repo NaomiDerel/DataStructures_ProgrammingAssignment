@@ -170,6 +170,12 @@ public class FacultyByScoreThenIDTree extends FacultyTree {
     public void DeleteWithGoalsAndID(int id , int goals)
     {
         Node<FacultyInTournament> X = this.search(id , goals);
+        Node<FacultyInTournament> X_predecessor = X.predecessor;
+        Node<FacultyInTournament> X_successor = X.successor;
+
+        X_successor.setPredecessor(X_predecessor);
+        X_predecessor.setSuccessor(X_successor);
+
         DeleteWithNode(X);
     }
 

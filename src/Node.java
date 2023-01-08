@@ -39,4 +39,12 @@ public class Node<E>
     public Node<E> getParent() {
         return parent;
     }
+
+    public void setSuccessor(Node<E> successor) {
+        this.successor = successor;
+    }
+
+    public void setPredecessor(Node<E> predecessor) {
+        this.predecessor = predecessor;
+    }
 }
