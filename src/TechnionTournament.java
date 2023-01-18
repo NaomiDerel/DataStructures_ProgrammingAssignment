@@ -4,7 +4,6 @@ public class TechnionTournament implements Tournament {
 
     // This tree contains the faculties in the tournament, sorted by id.
     // We use it to find any faculty by its id in O(log(n)).
-    // Use to extract the score in order to find a faculty in the second tree.
     // Contains players.
     protected FacultyByIDTree facultyByIDTree;
 
@@ -17,7 +16,6 @@ public class TechnionTournament implements Tournament {
 
     // This tree contains the players in the tournament, sorted by id.
     // We use it to find any player (free agent or from faculty) by its id in O(log(n)).
-    // Use to extract only the basic information on it: player id and name, goals.
     protected PlayerByIDTree playerByIDTree;
 
 
@@ -30,6 +28,7 @@ public class TechnionTournament implements Tournament {
 
     /**
      * Initialize the 4 data structures we need to maintain the tournament.
+     * Time Complexity: O(1).
      */
     @Override
     public void init() {
@@ -41,16 +40,19 @@ public class TechnionTournament implements Tournament {
 
     /**
      * Add the new faculty to the tournament, by updating both data structures in charge of faculties.
+     * Time Complexity: O(log(n)) - since insert is O(log(n)).
      *
      * @param faculty - new faculty with id and name.
      */
     @Override
     public void addFacultyToTournament(Faculty faculty) {
-        FacultyInTournament newFaculty1 = new FacultyInTournament(faculty);
+        Faculty f1 = new Faculty(faculty.getId(), faculty.getName());
+        FacultyInTournament newFaculty1 = new FacultyInTournament(f1);
         Node<FacultyInTournament> newFacultyNode1 = new Node<>(newFaculty1);
         this.facultyByIDTree.Insert(newFacultyNode1);
 
-        FacultyInTournament newFaculty2 = new FacultyInTournament(faculty);
+        Faculty f2 = new Faculty(faculty.getId(), faculty.getName());
+        FacultyInTournament newFaculty2 = new FacultyInTournament(f2);
         Node<FacultyInTournament> newFacultyNode2 = new Node<>(newFaculty2);
         this.facultyByScoreThenIDTree.Insert(newFacultyNode2);
     }
@@ -60,6 +62,9 @@ public class TechnionTournament implements Tournament {
      * by removing it from both data structures in charge of faculties.
      * Update the players in the faculty to be free agents.
      * Update both player trees with players as free agents.
+     *
+     * Time Complexity: O(log(n) + log(m)) - log(n) to remove a faculty from each tree,
+     *                                       O(11*log(m)) to find and update all players.
      *
      * @param faculty_id - faculty identifier.
      */
@@ -92,6 +97,9 @@ public class TechnionTournament implements Tournament {
     /**
      * Add a new player to both player trees, with faculty identifier.
      * Add a new player to both faculty trees in the players array of the correct faculty.
+     *
+     * Time Complexity: O(log(n) + log(m)) - log(n) to find the faculty in facultyByID tree,
+     *      *                                log(m) to insert the player into each player tree.
      *
      * @param faculty_id - faculty identifier
      * @param player     - new Player object (need to clone data)
@@ -128,6 +136,8 @@ public class TechnionTournament implements Tournament {
     /**
      * Add a new player to the faculty players array at the first empty spot.
      *
+     * Time Complexity: O(1)
+     *
      * @param players - array of players in faculty.
      * @param pit - new player.
      */
@@ -140,7 +150,8 @@ public class TechnionTournament implements Tournament {
         }
     }
 
-    /**
+    /** Time Complexity: O(log(n) + log(m)) - log(n) to find the faculty in facultyByID tree to update players,
+     *      *                                 log(m) to delete the player into each player tree.
      *
      * @param faculty_id
      * @param player_id
@@ -180,6 +191,8 @@ public class TechnionTournament implements Tournament {
     /**
      * Remove a player from an array of players and move all after it to the left.
      *
+     * Time Complexity: O(1)
+     *
      * @param player_id - player to remove
      * @param players - array of players
      */
@@ -196,6 +209,16 @@ public class TechnionTournament implements Tournament {
         }
     }
 
+    /**
+     * Time Complexity: O(log(n) + K*log(m)) - log(n) to find each faculty in each tree, delete and insert,
+     *                                         log(m) to find each player in each player tree, do this a total of k times.
+     *
+     * @param faculty_id1
+     * @param faculty_id2
+     * @param winner
+     * @param faculty1_goals
+     * @param faculty2_goals
+     */
     @Override
     public void playGame(int faculty_id1, int faculty_id2, int winner,
                          ArrayList<Integer> faculty1_goals, ArrayList<Integer> faculty2_goals) {
@@ -270,6 +293,11 @@ public class TechnionTournament implements Tournament {
 
     }
 
+    /**
+     * Time Complexity: O(1) - attribute saved in tree.
+     *
+     * @param player
+     */
     @Override
     public void getTopScorer(Player player) {
         Node<PlayerInTournament> player_node = this.playerByGoalsThenIDTree.max_leaf.predecessor;
@@ -278,6 +306,12 @@ public class TechnionTournament implements Tournament {
         player.setId(top_player.getId());
     }
 
+    /**
+     * Time Complexity: O(log(n)) - log(n) to find the faculty in facultyByID tree,
+     *                              finding the top player in an array with 11 players is done in O(1)
+     * @param faculty_id
+     * @param player
+     */
     @Override
     public void getTopScorerInFaculty(int faculty_id, Player player) {
         Node<FacultyInTournament> fid1 = this.facultyByIDTree.search(faculty_id);
@@ -289,6 +323,13 @@ public class TechnionTournament implements Tournament {
             player = null; // Do something else?
     }
 
+    /**
+     * Time Complexity: O(k) - get predecessor in O(1) time, k times.
+     *
+     * @param faculties
+     * @param k
+     * @param ascending
+     */
     @Override
     public void getTopKFaculties(ArrayList<Faculty> faculties, int k, boolean ascending) {
         ArrayList<Faculty> top_k = new ArrayList<>();
@@ -310,6 +351,13 @@ public class TechnionTournament implements Tournament {
         }
     }
 
+    /**
+     * Time Complexity: O(k) - get predecessor in O(1) time, k times.,
+     *
+     * @param players
+     * @param k
+     * @param ascending
+     */
     @Override
     public void getTopKScorers(ArrayList<Player> players, int k, boolean ascending) {
         ArrayList<Player> top_k = new ArrayList<>();
@@ -329,6 +377,11 @@ public class TechnionTournament implements Tournament {
         }
     }
 
+    /**
+     * Time Complexity: O(1) - attribute saved in tree.
+     *
+     * @param faculty
+     */
     @Override
     public void getTheWinner(Faculty faculty) {
         Node<FacultyInTournament> faculty_node = this.facultyByScoreThenIDTree.max_leaf.predecessor;

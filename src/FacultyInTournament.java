@@ -23,6 +23,14 @@ public class FacultyInTournament {
         return faculty;
     }
 
+    public String getName() {
+        return this.faculty.getName();
+    }
+
+    public int getID() {
+        return this.faculty.getId();
+    }
+
     public int getScore() {
         return score;
     }
