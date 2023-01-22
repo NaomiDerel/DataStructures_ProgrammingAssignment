@@ -167,11 +167,13 @@ public class PlayerByGoalsThenIDTree extends PlayerTree
         s.predecessor = zn;
     }
 
+
+    /*
     public void DeleteWithGoalsAndID(int id , int goals)
     {
         Node<PlayerInTournament> X = this.search(id , goals);
         DeleteWithNode(X);
     }
+     */
 
 }
-
