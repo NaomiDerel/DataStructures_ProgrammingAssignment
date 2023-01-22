@@ -8,10 +8,6 @@ public class Node<E>
     protected Node<E> successor;
     protected Node<E> predecessor;
 
-
-    public Node() {
-    }
-
     public Node(E node_content){
         this.node_content = node_content;
         this.parent = null;
@@ -30,14 +26,6 @@ public class Node<E>
         this.right = null;
         this.successor = null;
         this.predecessor = null;
-    }
-
-    public E getNode_content() {
-        return node_content;
-    }
-
-    public Node<E> getParent() {
-        return parent;
     }
 
     public void setSuccessor(Node<E> successor) {
