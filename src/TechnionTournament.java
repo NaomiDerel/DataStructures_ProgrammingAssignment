@@ -152,9 +152,9 @@ public class TechnionTournament implements Tournament {
 
     /** Time Complexity: O(log(n) + log(m)) - log(n) to find the faculty in facultyByID tree to update players,
      *      *                                 log(m) to delete the player into each player tree.
-     *
-     * @param faculty_id
-     * @param player_id
+     * This function removes a player from a faculty
+     * @param faculty_id - ID of the given faculty
+     * @param player_id - ID of the given player located in the faculty
      */
     @Override
     public void removePlayerFromFaculty(int faculty_id, int player_id) {
@@ -212,12 +212,12 @@ public class TechnionTournament implements Tournament {
     /**
      * Time Complexity: O(log(n) + K*log(m)) - log(n) to find each faculty in each tree, delete and insert,
      *                                         log(m) to find each player in each player tree, do this a total of k times.
-     *
-     * @param faculty_id1
-     * @param faculty_id2
-     * @param winner
-     * @param faculty1_goals
-     * @param faculty2_goals
+     * This function describes a game between 2 faculties 
+     * @param faculty_id1 - first faculty ID
+     * @param faculty_id2 - second faculty ID
+     * @param winner - game result - 0 for a tie, and 1 or 2 for a win for the corresponding faculty
+     * @param faculty1_goals - array of integers
+     * @param faculty2_goals - array of integers
      */
     @Override
     public void playGame(int faculty_id1, int faculty_id2, int winner,
@@ -295,8 +295,8 @@ public class TechnionTournament implements Tournament {
 
     /**
      * Time Complexity: O(1) - attribute saved in tree.
-     *
-     * @param player
+     * This function finds the top scorer in tournament
+     * @param player - player object
      */
     @Override
     public void getTopScorer(Player player) {
@@ -309,8 +309,9 @@ public class TechnionTournament implements Tournament {
     /**
      * Time Complexity: O(log(n)) - log(n) to find the faculty in facultyByID tree,
      *                              finding the top player in an array with 11 players is done in O(1)
-     * @param faculty_id
-     * @param player
+     * This function finds the top scorer in the given faculty
+     * @param faculty_id - integer, ID of the faculty
+     * @param player - player object
      */
     @Override
     public void getTopScorerInFaculty(int faculty_id, Player player) {
@@ -325,10 +326,10 @@ public class TechnionTournament implements Tournament {
 
     /**
      * Time Complexity: O(k) - get predecessor in O(1) time, k times.
-     *
-     * @param faculties
-     * @param k
-     * @param ascending
+     * This function finds the leading K faculties in the tournament
+     * @param faculties - array of faculties
+     * @param k - integer indicating on the amount of top scorers
+     * @param ascending - boolean variable, whether the output is on ascending or descending order
      */
     @Override
     public void getTopKFaculties(ArrayList<Faculty> faculties, int k, boolean ascending) {
@@ -353,10 +354,10 @@ public class TechnionTournament implements Tournament {
 
     /**
      * Time Complexity: O(k) - get predecessor in O(1) time, k times.,
-     *
-     * @param players
-     * @param k
-     * @param ascending
+     * This function finds the top K scorers in the tournament
+     * @param players - array of players
+     * @param k - integer indicating on the amount of top scorers
+     * @param ascending - boolean variable, whether the output is on ascending or descending order
      */
     @Override
     public void getTopKScorers(ArrayList<Player> players, int k, boolean ascending) {
@@ -379,8 +380,8 @@ public class TechnionTournament implements Tournament {
 
     /**
      * Time Complexity: O(1) - attribute saved in tree.
-     *
-     * @param faculty
+     * This function finds the winner in the tournament
+     * @param faculty - faculty object
      */
     @Override
     public void getTheWinner(Faculty faculty) {
